@@ -22,7 +22,7 @@ To install Api-Workbench, make sure you have Go installed on
 your system. Then, run the following command:
 
 ```shell
-go install github.com/your-username/api-workbench
+go install github.com/christianhturner/api-workbench
 ```
 
 ## Usage
