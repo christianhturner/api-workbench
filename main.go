@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/christianhturner/api-workbench/server"
 	"github.com/christianhturner/api-workbench/tui/mainMenu"
 )
 
@@ -17,7 +18,17 @@ func main() {
 		os.Exit(1)
 	}
 	defer logFile.Close()
-	createNetPath()
+	// createNetPath()
+	dd, err := server.NewDataDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = dd.CreateDataDirs()
+	if err != nil {
+		log.Panic(err)
+	}
+	log.Printf("root: %s\nwww: %s\nprojects: %s", dd.GetRootPath(), dd.GetWWWPath(), dd.GetProjectPath())
+
 	p := tea.NewProgram(mainMenu.InitialModel())
 	if _, err := p.Run(); err != nil {
 		log.Printf("Alas, there's been an error: %v", err)
