@@ -15,8 +15,8 @@ type mainMenuSelection struct {
 type MainMenu struct {
 	selected   map[int]struct{}
 	selections []mainMenuSelection
-	cursor     int
 	output     []string
+	cursor     int
 }
 
 func InitialModel() MainMenu {
