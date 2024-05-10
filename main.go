@@ -29,7 +29,7 @@ func main() {
 	}
 	log.Printf("root: %s\nwww: %s\nprojects: %s", dd.GetRootPath(), dd.GetWWWPath(), dd.GetProjectPath())
 
-	p := tea.NewProgram(mainMenu.InitialModel())
+	p := tea.NewProgram(mainMenu.InitialModel(), tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
 		log.Printf("Alas, there's been an error: %v", err)
 		os.Exit(1)
