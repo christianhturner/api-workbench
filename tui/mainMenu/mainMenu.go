@@ -34,23 +34,24 @@ func (m MainMenu) Init() tea.Cmd {
 }
 
 func (m MainMenu) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	km := settings.DefaultKeyMap()
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch {
-		case key.Matches(msg, settings.DefaultKeyMap.Up):
+		case key.Matches(msg, km.Up):
 			if m.cursor > 0 {
 				m.cursor--
 			}
-		case key.Matches(msg, settings.DefaultKeyMap.Down):
+		case key.Matches(msg, km.Down):
 			if m.cursor < len(m.selections)-1 {
 				m.cursor++
 			}
-		case key.Matches(msg, settings.DefaultKeyMap.Enter):
+		case key.Matches(msg, km.Enter):
 			selection := m.selections[m.cursor]
 			printWorld := fmt.Sprintf("hello, %s\n", selection.title)
 			m.output = append(m.output, printWorld)
 
-		case key.Matches(msg, settings.DefaultKeyMap.Quit):
+		case key.Matches(msg, km.Quit):
 			return m, tea.Quit
 		}
 	}
