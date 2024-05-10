@@ -65,3 +65,7 @@ func (dd *DataDir) GetRootPath() string {
 func (dd *DataDir) GetProjectPath() string {
 	return dd.projectPath
 }
+
+func (dd *DataDir) GetConfigPath() string {
+	return dd.configpath
+}
