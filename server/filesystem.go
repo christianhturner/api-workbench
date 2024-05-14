@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -68,4 +69,13 @@ func (dd *DataDir) GetProjectPath() string {
 
 func (dd *DataDir) GetConfigPath() string {
 	return dd.configpath
+}
+
+// ReadFile returns the contents of a file as a string of bytes
+func ReadFile(file *os.File) ([]byte, error) {
+	bytes, err := os.ReadFile(file.Name())
+	if err != nil {
+		return []byte(""), fmt.Errorf("%w: unable to read file: %s", err, file.Name())
+	}
+	return bytes, nil
 }

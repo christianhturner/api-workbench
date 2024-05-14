@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"time"
 
 	"github.com/christianhturner/api-workbench/server"
 	"gorm.io/gorm"
@@ -21,15 +20,22 @@ import (
 // available in this project. The API configurations will map to the physical
 // file drectory representations.
 type Project struct {
-	CreatedAt time.Time
-	UpdatedAt time.Time
 	gorm.Model
-	DeletedAt   gorm.DeletedAt
 	Name        string
 	wwwPath     string
 	projectPath string
-	ID          uint `gorm:"primaryKey"`
 }
+
+// Implement list.Item methods for bubbletea TUI
+
+// List project name and implements list.Item method
+func (p Project) Title() string { return p.Name }
+
+// List project description for our list
+func (p Project) Description() string { return fmt.Sprintf("%d", p.ID) }
+
+// FilterValue defines what field is used for filtering and required method for list.Item
+func (p Project) FilterValue() string { return p.Name }
 
 type DBUtils interface {
 	PrintProjects()

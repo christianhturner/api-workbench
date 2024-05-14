@@ -9,7 +9,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/christianhturner/api-workbench/project"
 	"github.com/christianhturner/api-workbench/server"
-	mainMenu "github.com/christianhturner/api-workbench/tui/mainmenu"
+	"github.com/christianhturner/api-workbench/tui"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -46,18 +46,20 @@ func main() {
 		if err != nil {
 			log.Fatalf("error creating project: %v", err)
 		}
-		p := tea.NewProgram(mainMenu.InitialModel(), tea.WithAltScreen())
-		if _, err := p.Run(); err != nil {
-			log.Printf("Alas, there has been an error: %v", err)
-			os.Exit(1)
-		}
+		// p := tea.NewProgram(mainMenu.InitialModel(), tea.WithAltScreen())
+		// if _, err := p.Run(); err != nil {
+		// 	log.Printf("Alas, there has been an error: %v", err)
+		// 	os.Exit(1)
+		// }
+		tui.StartTea(pr)
 	} else {
+		tui.StartTea(pr)
 
-		p := tea.NewProgram(mainMenu.InitialModel(), tea.WithAltScreen())
-		if _, err := p.Run(); err != nil {
-			log.Printf("Alas, there's been an error: %v", err)
-			os.Exit(1)
-		}
+		// p := tea.NewProgram(mainMenu.InitialModel(), tea.WithAltScreen())
+		// if _, err := p.Run(); err != nil {
+		// 	log.Printf("Alas, there's been an error: %v", err)
+		// 	os.Exit(1)
+		// }
 	}
 }
 

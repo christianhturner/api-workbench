@@ -1,17 +1,36 @@
 package settings
 
-import "github.com/charmbracelet/bubbles/key"
+import (
+	"fmt"
+
+	"github.com/charmbracelet/bubbles/key"
+)
 
 type KeyMap struct {
-	Up    key.Binding
-	Down  key.Binding
-	Left  key.Binding
+	// Up used during nav mode
+	Up key.Binding
+	// Down used during nav mode
+	Down key.Binding
+	// Left used during nav mode
+	Left key.Binding
+	// Right used during nav mode
 	Right key.Binding
+	// Enter used during nav, edit, and create mode
 	Enter key.Binding
-	Quit  key.Binding
+	// Quite used during nav mode
+	Quit key.Binding
+
+	// Create used during create mode
+	Create key.Binding
+	// Rename used during create mode
+	Rename key.Binding
+	// Delete used during create mode
+	Delete key.Binding
+	// Back used during create mode
+	Back key.Binding
 }
 
-func DefaultKeyMap() *KeyMap {
+func DefaultKeyMap(stringContext string) *KeyMap {
 	km := new(KeyMap)
 	km.Up = key.NewBinding(
 		key.WithKeys("k", "up"),
@@ -43,5 +62,24 @@ func DefaultKeyMap() *KeyMap {
 		key.WithHelp("", "quit application"),
 	)
 
+	km.Create = key.NewBinding(
+		key.WithKeys("c", "create"),
+		key.WithHelp("", fmt.Sprintf("create %s", stringContext)),
+	)
+
+	km.Rename = key.NewBinding(
+		key.WithKeys("r", "rename"),
+		key.WithHelp("", fmt.Sprintf("rename %s", stringContext)),
+	)
+
+	km.Delete = key.NewBinding(
+		key.WithKeys("d", "delete"),
+		key.WithHelp("", fmt.Sprintf("delete %s", stringContext)),
+	)
+
+	km.Back = key.NewBinding(
+		key.WithKeys("b", "back"),
+		key.WithHelp("←", "back"),
+	)
 	return km
 }

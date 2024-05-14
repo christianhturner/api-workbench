@@ -62,7 +62,7 @@ func (m MainMenu) Init() tea.Cmd {
 func (m MainMenu) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	// var cmd tea.Cmd
 	var cmds []tea.Cmd
-	km := settings.DefaultKeyMap()
+	km := settings.DefaultKeyMap("")
 	switch msg := msg.(type) {
 	case updateProjectListMsg:
 		{

@@ -3,11 +3,22 @@ package common
 import (
 	"context"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/log"
+	"github.com/christianhturner/api-workbench/project"
 	"github.com/christianhturner/api-workbench/settings"
 	"github.com/christianhturner/api-workbench/tui/styles"
 	"github.com/muesli/termenv"
+)
+
+var (
+	// The current running program
+	P *tea.Program
+	// Project DB utils shared across TUI
+	ProjectDB *project.DB
+	// WindowSize store for the terminal window
+	WindowSize tea.WindowSizeMsg
 )
 
 type Common struct {
@@ -33,7 +44,7 @@ func NewCommon(ctx context.Context, out *lipgloss.Renderer, col, row int) Common
 		Renderer: out,
 		Output:   out.Output(),
 		Styles:   styles.DefaultStyles(out),
-		KeyMap:   settings.DefaultKeyMap(),
+		KeyMap:   settings.DefaultKeyMap(""),
 		Logger:   log.FromContext(ctx).WithPrefix("debug"),
 	}
 }
