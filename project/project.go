@@ -140,6 +140,18 @@ func (d *DB) HasProjects() bool {
 
 // DeleteProject delete project by ID
 func (d *DB) DeleteProject(projectID uint) error {
+	project, err := d.GetProjectByID(projectID)
+	if err != nil {
+		log.Print(err)
+	}
+	err = server.DeleteDirs(project.WWWPath)
+	if err != nil {
+		log.Print(err)
+	}
+	err = server.DeleteDirs(project.ProjectPath)
+	if err != nil {
+		log.Print(err)
+	}
 	if err := d.DB.Delete(&Project{}, projectID).Error; err != nil {
 		log.Printf("cannot delete project: %v", err)
 		return fmt.Errorf("cannot delete project: %v", err)

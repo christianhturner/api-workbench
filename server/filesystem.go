@@ -79,3 +79,13 @@ func ReadFile(file *os.File) ([]byte, error) {
 	}
 	return bytes, nil
 }
+
+// DeleteDirs specifies the path to a directory which should be deleted including all child directories
+func DeleteDirs(path string) error {
+	err := os.RemoveAll(path)
+	if err != nil {
+		log.Printf("Unable to delete directories: %s/*\n%v", path, err)
+		return err
+	}
+	return nil
+}
