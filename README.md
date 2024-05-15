@@ -52,3 +52,17 @@ If using Neovim, set your breakpoints, press continue in DAP
 and search for api-workbench and run the process
 
 4. Your now running the sourcecode!
+
+## ROADMAP
+
+### Release Ready TODOs
+
+- Support Complete API creation and definition generation within the TUI, and store that within our database.
+- Provide 1:1 feature support and compatibility with the HTTP Spec.
+- Provide 1:1 feature support for RESTAPIs
+- Provide the option to import API creation and definitions through importing JSON files rather than strictly throughthe TUI interface.
+- Support exporting our API definitions into our JSON format, so that your data can be migrated between instances of api-workbench
+
+### Post Release TODOs
+- Add support for websocket spec 1:1
+- Create tooling that would allow users to incorporate API-Workbench as an integration testing suite with their codebase (preferably language agnostic) and interactions should mirror interacting with the HTTP protocol as closely as possible.
