@@ -22,8 +22,8 @@ import (
 type Project struct {
 	gorm.Model
 	Name        string
-	wwwPath     string
-	projectPath string
+	WWWPath     string
+	ProjectPath string
 }
 
 // Implement list.Item methods for bubbletea TUI
@@ -58,8 +58,8 @@ func (d *DB) CreateDBEntry(name string) (Project, error) {
 	}
 	project := Project{
 		Name:        name,
-		wwwPath:     filepath.Join(dataDir.GetWWWPath(), name),
-		projectPath: filepath.Join(dataDir.GetProjectPath(), name),
+		WWWPath:     filepath.Join(dataDir.GetWWWPath(), name),
+		ProjectPath: filepath.Join(dataDir.GetProjectPath(), name),
 	}
 	if err = d.DB.Create(&project).Error; err != nil {
 		log.Printf("cannont create project: %v", err)
@@ -71,26 +71,26 @@ func (d *DB) CreateDBEntry(name string) (Project, error) {
 
 func (p *Project) createFilePathDependencies() error {
 	// Create data directory project Path for API configs
-	_, err := os.Stat(p.projectPath)
+	_, err := os.Stat(p.ProjectPath)
 	if os.IsNotExist(err) {
-		log.Printf("Creating www sub directory for %s at %s", p.Name, p.projectPath)
-		err = os.Mkdir(p.projectPath, 0755)
+		log.Printf("Creating www sub directory for %s at %s", p.Name, p.ProjectPath)
+		err = os.Mkdir(p.ProjectPath, 0755)
 		if err != nil {
 			log.Panic(err)
 		}
 	} else {
-		log.Printf("Path, %s already exist for project %s.", p.projectPath, p.Name)
+		log.Printf("Path, %s already exist for project %s.", p.ProjectPath, p.Name)
 	}
 	// Create data directory www Path for emulated http server
-	_, err = os.Stat(p.wwwPath)
+	_, err = os.Stat(p.WWWPath)
 	if os.IsNotExist(err) {
-		log.Printf("Creating www sub-directory for %s at %s.", p.Name, p.wwwPath)
-		err = os.Mkdir(p.wwwPath, 0755)
+		log.Printf("Creating www sub-directory for %s at %s.", p.Name, p.WWWPath)
+		err = os.Mkdir(p.WWWPath, 0755)
 		if err != nil {
 			log.Panic(err)
 		}
 	} else {
-		log.Printf("Path, %s already exist for project %s.", p.wwwPath, p.Name)
+		log.Printf("Path, %s already exist for project %s.", p.WWWPath, p.Name)
 	}
 	if err != nil {
 		log.Print(err)
@@ -202,8 +202,8 @@ func New(name string) (*Project, error) {
 	}
 	return &Project{
 		Name:        name,
-		wwwPath:     dataDir.GetWWWPath(),
-		projectPath: dataDir.GetProjectPath(),
+		WWWPath:     dataDir.GetWWWPath(),
+		ProjectPath: dataDir.GetProjectPath(),
 	}, nil
 }
 
