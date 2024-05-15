@@ -17,7 +17,7 @@ type (
 
 func createProjectCmd(name string, db *project.DB) tea.Cmd {
 	return func() tea.Msg {
-		_, err := db.CreateDBEntry(name)
+		_, err := db.CreateProject(name)
 		if err != nil {
 			return errMsg{err}
 		}

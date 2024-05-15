@@ -51,7 +51,7 @@ type DB struct {
 	DB *gorm.DB
 }
 
-func (d *DB) CreateDBEntry(name string) (Project, error) {
+func (d *DB) CreateProject(name string) (Project, error) {
 	dataDir, err := server.NewDataDir()
 	if err != nil {
 		log.Panic(err)

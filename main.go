@@ -42,7 +42,7 @@ func main() {
 	}
 	if len(projects) < 1 {
 		name := project.NewProjectPrompt()
-		_, err := pr.CreateDBEntry(name)
+		_, err := pr.CreateProject(name)
 		if err != nil {
 			log.Fatalf("error creating project: %v", err)
 		}
